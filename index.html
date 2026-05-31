@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sahaya Anish — Power BI Developer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pbi-gold: #F2C94C;
+      --pbi-orange: #F2994A;
+      --pbi-bg: #0d0d0f;
+      --pbi-card: #141417;
+      --pbi-card2: #1a1a1f;
+      --pbi-border: rgba(242,201,76,0.15);
+      --pbi-text: #e8e8e8;
+      --pbi-muted: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--pbi-bg);
+      font-family: 'Syne', sans-serif;
+      color: var(--pbi-text);
+      min-height: 100vh;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--pbi-bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(242,201,76,0.3); border-radius: 4px; }
+
+    /* NAV */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      border-bottom: 1px solid var(--pbi-border);
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,15,0.96);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--pbi-gold);
+      letter-spacing: 0.1em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 12px;
+      color: var(--pbi-muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .nav-links a:hover { color: var(--pbi-gold); }
+    .nav-links a.active { color: var(--pbi-gold); }
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--pbi-gold);
+      border-radius: 2px;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 5rem 3rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .hero-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--pbi-gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--pbi-gold);
+    }
+    .hero-name {
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+    }
+    .hero-name span { color: var(--pbi-gold); }
+    .hero-bio {
+      font-size: 16px;
+      color: var(--pbi-muted);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      max-width: 480px;
+    }
+    .hero-bio strong { color: var(--pbi-gold); font-weight: 600; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--pbi-gold);
+      color: #0d0d0f;
+      border: none;
+      padding: 0.75rem 1.75rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline {
+      background: transparent;
+      color: var(--pbi-gold);
+      border: 1px solid var(--pbi-border);
+      padding: 0.75rem 1.75rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 4px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--pbi-gold); background: rgba(242,201,76,0.05); }
+
+    /* HERO VISUAL */
+    .hero-visual {
+      background: var(--pbi-card);
+      border: 1px solid var(--pbi-border);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+    .dash-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--pbi-border);
+    }
+    .dot { width: 9px; height: 9px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FEBC2E; }
+    .dot-g { background: #28C840; }
+    .dash-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--pbi-muted);
+      margin-left: auto;
+    }
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 1rem;
+    }
+    .kpi {
+      background: var(--pbi-card2);
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .kpi-label { font-size: 9px; color: var(--pbi-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
+    .kpi-val { font-family: 'Space Mono', monospace; font-size: 20px; font-weight: 700; color: var(--pbi-gold); }
+    .kpi-delta { font-size: 9px; color: #4CAF50; margin-top: 3px; }
+    .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .chart-box {
+      background: var(--pbi-card2);
+      border-radius: 8px;
+      padding: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .chart-box-label { font-size: 9px; color: var(--pbi-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+    .bar-chart { display: flex; gap: 5px; align-items: flex-end; height: 65px; }
+    .bar-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+    .bar {
+      width: 100%;
+      border-radius: 3px 3px 0 0;
+      animation: grow 1s ease forwards;
+      transform-origin: bottom;
+    }
+    @keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+    .bar-lbl { font-size: 8px; color: var(--pbi-muted); font-family: 'Space Mono', monospace; }
+
+    /* SECTION */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 3rem 0;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .section-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--pbi-gold);
+      opacity: 0.55;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--pbi-border);
+    }
+
+    /* STAT CARDS */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 1rem;
+    }
+    .stat-card {
+      background: var(--pbi-card);
+      border: 1px solid var(--pbi-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .stat-card:hover { border-color: rgba(242,201,76,0.4); }
+    .stat-icon { font-size: 22px; margin-bottom: 1rem; color: var(--pbi-gold); }
+    .stat-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--pbi-gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-lbl { font-size: 12px; color: var(--pbi-muted); }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .about-text {
+      font-size: 15px;
+      line-height: 1.85;
+      color: #bbb;
+    }
+    .about-text strong { color: var(--pbi-gold); font-weight: 600; }
+    .about-text p { margin-bottom: 1.1rem; }
+    .about-highlights { display: flex; flex-direction: column; gap: 12px; }
+    .highlight-item {
+      background: var(--pbi-card);
+      border: 1px solid var(--pbi-border);
+      border-left: 3px solid var(--pbi-gold);
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.2rem;
+    }
+    .highlight-item h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .highlight-item p { font-size: 12px; color: var(--pbi-muted); }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 1rem;
+    }
+    .skill-card {
+      background: var(--pbi-card);
+      border: 1px solid var(--pbi-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .skill-card:hover { border-color: rgba(242,201,76,0.35); }
+    .skill-category {
+      font-size: 11px;
+      color: var(--pbi-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      font-family: 'Space Mono', monospace;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .skill-tag {
+      background: rgba(242,201,76,0.08);
+      border: 1px solid rgba(242,201,76,0.2);
+      color: var(--pbi-gold);
+      font-size: 11px;
+      padding: 4px 11px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+    .skill-tag.dim {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.08);
+      color: var(--pbi-muted);
+    }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; margin-bottom: 1rem; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 2.5rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--pbi-border);
+      position: relative;
+    }
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: 184px;
+      top: 2.7rem;
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--pbi-gold);
+      border: 2px solid var(--pbi-bg);
+      z-index: 1;
+    }
+    .exp-timeline-line {
+      position: absolute;
+      left: 188px;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--pbi-border);
+    }
+    .exp-period {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--pbi-muted);
+      margin-bottom: 5px;
+    }
+    .exp-company { font-size: 13px; font-weight: 600; color: var(--pbi-gold); }
+    .exp-role { font-size: 17px; font-weight: 700; margin-bottom: 0.6rem; }
+    .exp-desc { font-size: 14px; color: var(--pbi-muted); line-height: 1.75; margin-bottom: 0.9rem; }
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .exp-tag {
+      background: rgba(255,255,255,0.05);
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 4px;
+      color: var(--pbi-muted);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 1rem;
+    }
+    .project-card {
+      background: var(--pbi-card);
+      border: 1px solid var(--pbi-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.25s;
+      cursor: default;
+    }
+    .project-card:hover {
+      border-color: rgba(242,201,76,0.4);
+      transform: translateY(-2px);
+    }
+    .project-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--pbi-gold);
+      opacity: 0.5;
+      margin-bottom: 0.9rem;
+    }
+    .project-title { font-size: 15px; font-weight: 700; margin-bottom: 0.6rem; }
+    .project-desc { font-size: 12px; color: var(--pbi-muted); line-height: 1.65; margin-bottom: 1.1rem; }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 5px; }
+    .tech-badge {
+      background: rgba(242,201,76,0.08);
+      border: 1px solid rgba(242,201,76,0.15);
+      color: #c8a630;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    /* EDUCATION & CERTS */
+    .edu-cert-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+    .edu-card, .cert-card {
+      background: var(--pbi-card);
+      border: 1px solid var(--pbi-border);
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+    .card-section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--pbi-gold);
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .edu-degree { font-size: 17px; font-weight: 700; margin-bottom: 5px; }
+    .edu-school { font-size: 14px; color: var(--pbi-gold); margin-bottom: 5px; }
+    .edu-year { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--pbi-muted); }
+    .edu-divider {
+      margin: 1.5rem 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--pbi-border);
+    }
+    .cert-list { display: flex; flex-direction: column; gap: 10px; }
+    .cert-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.9rem 1rem;
+      background: var(--pbi-card2);
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: border-color 0.2s;
+    }
+    .cert-item:hover { border-color: rgba(242,201,76,0.2); }
+    .cert-icon { color: var(--pbi-gold); font-size: 20px; flex-shrink: 0; }
+    .cert-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .cert-issuer { font-size: 11px; color: var(--pbi-muted); }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 1rem;
+    }
+    .contact-card {
+      background: var(--pbi-card);
+      border: 1px solid var(--pbi-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.25s;
+      text-decoration: none;
+      display: block;
+    }
+    .contact-card:hover {
+      border-color: var(--pbi-gold);
+      background: rgba(242,201,76,0.04);
+      transform: translateY(-2px);
+    }
+    .contact-card i { font-size: 26px; color: var(--pbi-gold); margin-bottom: 0.6rem; display: block; }
+    .contact-type { font-size: 10px; color: var(--pbi-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
+    .contact-val { font-size: 12px; font-weight: 600; color: var(--pbi-text); word-break: break-all; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--pbi-border);
+      margin-top: 4rem;
+    }
+    footer p { font-size: 12px; color: var(--pbi-muted); font-family: 'Space Mono', monospace; }
+    footer span { color: var(--pbi-gold); }
+
+    /* FADE IN */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .edu-cert-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: repeat(2, 1fr); }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .exp-item::before { display: none; }
+      .exp-timeline-line { display: none; }
+      .section { padding: 3rem 1.5rem 0; }
+      .nav { padding: 1rem 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-logo">SA // Portfolio</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="hero-tag">Power BI Developer · Data & Analytics</div>
+      <h1 class="hero-name">Sahaya<br><span>Anish.</span></h1>
+      <p class="hero-bio">
+        I transform raw, chaotic data into dashboards that don't just display numbers — they <strong>tell the story</strong> behind them. Turning complex datasets into decisions is what I do best.
+      </p>
+      <div class="hero-cta">
+        <a href="mailto:sahayaanish34@gmail.com" class="btn-primary">Get In Touch</a>
+        <a href="#projects" class="btn-outline">View Projects</a>
+      </div>
+    </div>
+
+    <!-- TECH STACK CARD -->
+    <div class="hero-visual">
+      <div class="dash-header">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <div class="dash-title">tech_stack.json</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="background:var(--pbi-card2);border-radius:8px;padding:0.85rem 1rem;border:1px solid rgba(255,255,255,0.04);">
+          <div style="font-size:9px;color:var(--pbi-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Core BI</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span style="background:rgba(242,201,76,0.12);border:1px solid rgba(242,201,76,0.25);color:var(--pbi-gold);font-size:10px;padding:3px 9px;border-radius:20px;">Power BI Desktop</span>
+            <span style="background:rgba(242,201,76,0.12);border:1px solid rgba(242,201,76,0.25);color:var(--pbi-gold);font-size:10px;padding:3px 9px;border-radius:20px;">Power BI Service</span>
+            <span style="background:rgba(242,201,76,0.12);border:1px solid rgba(242,201,76,0.25);color:var(--pbi-gold);font-size:10px;padding:3px 9px;border-radius:20px;">DAX</span>
+            <span style="background:rgba(242,201,76,0.12);border:1px solid rgba(242,201,76,0.25);color:var(--pbi-gold);font-size:10px;padding:3px 9px;border-radius:20px;">Power Query</span>
+          </div>
+        </div>
+        <div style="background:var(--pbi-card2);border-radius:8px;padding:0.85rem 1rem;border:1px solid rgba(255,255,255,0.04);">
+          <div style="font-size:9px;color:var(--pbi-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Data & Analytics</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span style="background:rgba(242,153,74,0.12);border:1px solid rgba(242,153,74,0.25);color:var(--pbi-orange);font-size:10px;padding:3px 9px;border-radius:20px;">MySQL</span>
+            <span style="background:rgba(242,153,74,0.12);border:1px solid rgba(242,153,74,0.25);color:var(--pbi-orange);font-size:10px;padding:3px 9px;border-radius:20px;">SQL</span>
+            <span style="background:rgba(242,153,74,0.12);border:1px solid rgba(242,153,74,0.25);color:var(--pbi-orange);font-size:10px;padding:3px 9px;border-radius:20px;">Data Modeling</span>
+            <span style="background:rgba(242,153,74,0.12);border:1px solid rgba(242,153,74,0.25);color:var(--pbi-orange);font-size:10px;padding:3px 9px;border-radius:20px;">ETL</span>
+          </div>
+        </div>
+        <div style="background:var(--pbi-card2);border-radius:8px;padding:0.85rem 1rem;border:1px solid rgba(255,255,255,0.04);">
+          <div style="font-size:9px;color:var(--pbi-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Productivity & Other</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:#aaa;font-size:10px;padding:3px 9px;border-radius:20px;">MS Excel</span>
+            <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:#aaa;font-size:10px;padding:3px 9px;border-radius:20px;">Google Analytics</span>
+            <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:#aaa;font-size:10px;padding:3px 9px;border-radius:20px;">MIS Reporting</span>
+            <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:#aaa;font-size:10px;padding:3px 9px;border-radius:20px;">Python</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAREER TIMELINE STRIP -->
+  <div class="section fade-in">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:1rem;">
+      <div style="background:var(--pbi-card);border:1px solid var(--pbi-border);border-radius:12px;padding:1.5rem;border-left:3px solid var(--pbi-gold);">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--pbi-gold);letter-spacing:0.1em;margin-bottom:0.6rem;">JAN 2023 — JUN 2023</div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:4px;">Data Analyst Intern</div>
+        <div style="font-size:12px;color:var(--pbi-muted);margin-bottom:0.75rem;">Shiro Software Solutions</div>
+        <div style="font-size:12px;color:#bbb;line-height:1.6;">ETL processes, data cleaning, Excel & Power BI reporting, statistical analysis.</div>
+      </div>
+      <div style="background:var(--pbi-card);border:1px solid var(--pbi-border);border-radius:12px;padding:1.5rem;border-left:3px solid var(--pbi-gold);">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--pbi-gold);letter-spacing:0.1em;margin-bottom:0.6rem;">JUL 2023 — FEB 2025</div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:4px;">Junior Power BI Developer</div>
+        <div style="font-size:12px;color:var(--pbi-muted);margin-bottom:0.75rem;">Shiro Software Solutions</div>
+        <div style="font-size:12px;color:#bbb;line-height:1.6;">Built dashboards, DAX measures, optimised data models — improved performance by 30%.</div>
+      </div>
+      <div style="background:var(--pbi-card);border:1px solid rgba(242,201,76,0.4);border-radius:12px;padding:1.5rem;border-left:3px solid var(--pbi-orange);position:relative;overflow:hidden;">
+        <div style="position:absolute;top:10px;right:12px;font-family:'Space Mono',monospace;font-size:9px;color:var(--pbi-orange);background:rgba(242,153,74,0.1);border:1px solid rgba(242,153,74,0.25);padding:2px 8px;border-radius:20px;">● Current</div>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--pbi-gold);letter-spacing:0.1em;margin-bottom:0.6rem;">JUN 2025 — PRESENT</div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:4px;">Power BI Developer</div>
+        <div style="font-size:12px;color:var(--pbi-muted);margin-bottom:0.75rem;">Calmove Technologies, Trivandrum</div>
+        <div style="font-size:12px;color:#bbb;line-height:1.6;">HR & MIS dashboards, KPI tracking, automated reporting, cross-functional analytics.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about" class="section fade-in">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About Me</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Hey — I'm <strong>Sahaya Anish</strong>, a Power BI Developer who believes that every dataset has a story waiting to be told. I didn't just learn to use Power BI — I learned to <strong>think in data</strong>.</p>
+        <p>With approximately <strong>3 years of hands-on experience</strong>, I specialise in designing, developing, and maintaining interactive dashboards and reports using Power BI Desktop, Power BI Service, and Power Query. I'm skilled in writing efficient <strong>DAX formulas</strong> for advanced data analysis and creating visually compelling reports.</p>
+        <p>From connecting and transforming data from multiple sources to optimising report performance and ensuring <strong>high data accuracy</strong>, I translate business requirements into actionable insights that drive informed decision-making for every stakeholder.</p>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-item">
+          <h4>Data Storyteller</h4>
+          <p>Translating complex metrics into clear, decision-ready narratives</p>
+        </div>
+        <div class="highlight-item">
+          <h4>DAX Specialist</h4>
+          <p>Advanced calculated columns, measures, and time intelligence</p>
+        </div>
+        <div class="highlight-item">
+          <h4>End-to-End Builder</h4>
+          <p>From raw source data to polished, published reports</p>
+        </div>
+        <div class="highlight-item">
+          <h4>Stakeholder-First Mindset</h4>
+          <p>Designing insights that resonate with both technical and business users</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div id="skills" class="section fade-in">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Skills & Tools</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-category">Core BI</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Power BI Desktop</span>
+          <span class="skill-tag">Power BI Service</span>
+          <span class="skill-tag">DAX</span>
+          <span class="skill-tag">Power Query</span>
+          <span class="skill-tag">Data Modeling</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Data & Databases</div>
+        <div class="skill-tags">
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Data Extraction</span>
+          <span class="skill-tag dim">Joins & Aggregations</span>
+          <span class="skill-tag dim">ETL Processes</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Microsoft Ecosystem</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Microsoft Excel</span>
+          <span class="skill-tag">PivotTables</span>
+          <span class="skill-tag">VLOOKUP</span>
+          <span class="skill-tag dim">Google Sheets</span>
+          <span class="skill-tag dim">Microsoft Office</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Visualization</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Dashboard Creation</span>
+          <span class="skill-tag">Interactive Reports</span>
+          <span class="skill-tag">Data Storytelling</span>
+          <span class="skill-tag dim">MIS Reporting</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Analytics</div>
+        <div class="skill-tags">
+          <span class="skill-tag">KPI Measurement</span>
+          <span class="skill-tag">Trend Analysis</span>
+          <span class="skill-tag">Workforce Metrics</span>
+          <span class="skill-tag dim">Google Analytics</span>
+          <span class="skill-tag dim">Python (Basic)</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Soft Skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Stakeholder Mgmt</span>
+          <span class="skill-tag">Requirements Gathering</span>
+          <span class="skill-tag dim">End-User Training</span>
+          <span class="skill-tag dim">Cross-functional Collab</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div id="experience" class="section fade-in">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-timeline-line"></div>
+        <div>
+          <div class="exp-period">Jun 2025 — Present</div>
+          <div class="exp-company">Calmove Technologies</div>
+        </div>
+        <div>
+          <div class="exp-role">Power BI Developer</div>
+          <div class="exp-desc">Developed and maintained interactive Power BI dashboards to support HR, operational, and management reporting needs. Designed data models and created DAX measures to track KPIs, workforce metrics, and business performance trends. Automated MIS reporting processes, reducing manual Excel work and improving reporting accuracy and turnaround time. Collaborated with cross-functional teams and performed data transformation, validation, and report optimisation for reliable, high-performance dashboards.</div>
+          <div class="exp-tags">
+            <span class="exp-tag">Power BI</span>
+            <span class="exp-tag">DAX</span>
+            <span class="exp-tag">Power Query</span>
+            <span class="exp-tag">SQL</span>
+            <span class="exp-tag">Data Modeling</span>
+            <span class="exp-tag">MIS Reporting</span>
+          </div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-timeline-line"></div>
+        <div>
+          <div class="exp-period">Jul 2023 — Feb 2025</div>
+          <div class="exp-company">Shiro Software Solutions</div>
+        </div>
+        <div>
+          <div class="exp-role">Junior Power BI Developer</div>
+          <div class="exp-desc">Developed interactive dashboards and reports using Power BI, enabling data-driven decision-making. Collaborated with business analysts to gather requirements and translate them into technical specifications. Utilised DAX functions for complex calculations and metrics. Optimised data models and ensured data accuracy through regular audits, improving dashboard performance by 30%. Provided training and support to end-users on Power BI tools and functionalities.</div>
+          <div class="exp-tags">
+            <span class="exp-tag">Power BI Desktop</span>
+            <span class="exp-tag">Power BI Service</span>
+            <span class="exp-tag">Power Query</span>
+            <span class="exp-tag">DAX</span>
+            <span class="exp-tag">MySQL</span>
+          </div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-timeline-line"></div>
+        <div>
+          <div class="exp-period">Jan 2023 — Jun 2023</div>
+          <div class="exp-company">Shiro Software Solutions</div>
+        </div>
+        <div>
+          <div class="exp-role">Data Analyst Intern</div>
+          <div class="exp-desc">Applied analytical skills to clean and analyse datasets, contributing to data-driven decision-making. Utilised Excel and Power BI for effective data visualisation and reporting. Collaborated on ETL processes to ensure data accuracy and consistency. Gained practical experience in statistical analysis and problem-solving within a business context.</div>
+          <div class="exp-tags">
+            <span class="exp-tag">MS Excel</span>
+            <span class="exp-tag">VLOOKUP</span>
+            <span class="exp-tag">Pivot Table</span>
+            <span class="exp-tag">Power BI Desktop</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div id="projects" class="section fade-in">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-num">01 //</div>
+        <div class="project-title">Employee Overview Dashboard</div>
+        <div class="project-desc">Interactive HR analytics dashboard providing a centralised view of employee master data and workforce insights. Features dynamic visuals for headcount, department distribution, tenure analysis, and employee status trends with drill-through by branch, role, and manager.</div>
+        <div class="project-tech">
+          <span class="tech-badge">Power BI</span>
+          <span class="tech-badge">DAX</span>
+          <span class="tech-badge">Data Modeling</span>
+          <span class="tech-badge">Power Query</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">02 //</div>
+        <div class="project-title">Backlog Dashboard</div>
+        <div class="project-desc">Internal project tracking dashboard giving a complete view of task progress across testers, developers, and release-ready modules. Tracks tasks assigned, work descriptions, pending counts, completed items, and released status per team member — all driven by dynamic slicers for flexible filtering by role or module.</div>
+        <div class="project-tech">
+          <span class="tech-badge">Power BI</span>
+          <span class="tech-badge">DAX</span>
+          <span class="tech-badge">Power Query</span>
+          <span class="tech-badge">Data Modeling</span>
+          <span class="tech-badge">Slicers</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">03 //</div>
+        <div class="project-title">Accounts Consolidation Dashboard</div>
+        <div class="project-desc">Multi-section financial consolidation dashboard covering Trial Balance (branch-wise balance sheet in a single view), Consolidated Statement of Financial Position, Statement of Profit or Loss, Statement of Cash Flow, and Statement of Changes in Equity — giving end users a unified financial picture across all branches.</div>
+        <div class="project-tech">
+          <span class="tech-badge">Power BI</span>
+          <span class="tech-badge">DAX</span>
+          <span class="tech-badge">Power Query</span>
+          <span class="tech-badge">Data Modeling</span>
+          <span class="tech-badge">Financial Reporting</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">04 //</div>
+        <div class="project-title">Revenue Cycle Management (RCM)</div>
+        <div class="project-desc">End-to-end Revenue Cycle Management dashboard designed to monitor and optimise the financial performance of the revenue pipeline. Provides visibility into billing, collections, claim status, and revenue trends — enabling management to identify bottlenecks and improve financial outcomes across the cycle.</div>
+        <div class="project-tech">
+          <span class="tech-badge">Power BI</span>
+          <span class="tech-badge">DAX</span>
+          <span class="tech-badge">Power Query</span>
+          <span class="tech-badge">SQL</span>
+          <span class="tech-badge">KPI Tracking</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDUCATION & CERTS -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Education & Certifications</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-cert-grid">
+      <div class="edu-card">
+        <div class="card-section-label">Education</div>
+        <div class="edu-degree">Master of Business Administration (MBA)</div>
+        <div class="edu-school">Scott Christian College – Kanyakumari, India</div>
+        <div class="edu-year">Nov 2020 — Jun 2022 · 78%</div>
+        <div class="edu-divider">
+          <div class="edu-degree" style="font-size:14px;margin-bottom:0.75rem;">Bachelor of Commerce (B.Com)</div>
+          <div class="edu-school" style="font-size:13px;margin-bottom:4px;">S.T. Hindu College – Nagercoil, India</div>
+          <div class="edu-year">Jun 2017 — Oct 2020 · 60%</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="card-section-label">Certifications</div>
+        <div class="cert-list">
+          <div class="cert-item">
+            <i class="ti ti-certificate cert-icon"></i>
+            <div>
+              <div class="cert-name">Google Analytics Certification</div>
+              <div class="cert-issuer">Google · Aug 2024 (Valid till Aug 2025)</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <i class="ti ti-certificate cert-icon"></i>
+            <div>
+              <div class="cert-name">SQL Programming (Intermediate)</div>
+              <div class="cert-issuer">HackerRank · Aug 2024</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <i class="ti ti-certificate cert-icon"></i>
+            <div>
+              <div class="cert-name">The Complete Introduction to SQL Programming</div>
+              <div class="cert-issuer">Udemy · Dec 2023</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <i class="ti ti-certificate cert-icon"></i>
+            <div>
+              <div class="cert-name">Harnessing the Power of Data with Power BI</div>
+              <div class="cert-issuer">Coursera · Oct 2023</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <i class="ti ti-certificate cert-icon"></i>
+            <div>
+              <div class="cert-name">Foundations: Data, Data, Everywhere</div>
+              <div class="cert-issuer">Coursera · Oct 2023</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact" class="section fade-in">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-grid">
+      <a href="mailto:sahayaanish34@gmail.com" class="contact-card">
+        <i class="ti ti-mail"></i>
+        <div class="contact-type">Email</div>
+        <div class="contact-val">sahayaanish34@gmail.com</div>
+      </a>
+      <a href="tel:+917598142181" class="contact-card">
+        <i class="ti ti-phone"></i>
+        <div class="contact-type">Phone</div>
+        <div class="contact-val">+91 75981 42181</div>
+      </a>
+      <a href="https://linkedin.com/in/sahayaanish" target="_blank" class="contact-card">
+        <i class="ti ti-brand-linkedin"></i>
+        <div class="contact-type">LinkedIn</div>
+        <div class="contact-val">linkedin.com/in/sahayaanish</div>
+      </a>
+      <a href="https://github.com/sahayaanish" target="_blank" class="contact-card">
+        <i class="ti ti-brand-github"></i>
+        <div class="contact-type">GitHub</div>
+        <div class="contact-val">github.com/sahayaanish</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Designed & built by <span>Sahaya Anish</span> · Power BI Developer · <span>© 2026</span></p>
+  </footer>
+
+  <script>
+    // Fade-in on scroll
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+    // Scroll spy — highlight active nav link
+    const sections = ['about','skills','experience','projects','contact'];
+    const navLinks = {};
+    sections.forEach(id => {
+      navLinks[id] = document.querySelector(`.nav-links a[href="#${id}"]`);
+    });
+
+    function onScroll() {
+      let current = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 120) current = id;
+      });
+      sections.forEach(id => {
+        if (navLinks[id]) navLinks[id].classList.toggle('active', id === current);
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Smooth scroll with offset for sticky nav
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.getElementById(this.getAttribute('href').slice(1));
+        if (target) {
+          const offset = 80;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
